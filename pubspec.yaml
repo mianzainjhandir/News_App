@@ -39,6 +39,7 @@ dependencies:
   http: ^1.6.0
   intl:
   cached_network_image:
+  get: ^4.7.3
 
 dev_dependencies:
   flutter_test:
