@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart'as http;
 import 'package:news_app/model/news_channel_headlines_model.dart';
 
@@ -14,11 +15,11 @@ class NewsRepository {
     if(response.statusCode == 200){
 
       final body = jsonDecode(response.body.toString());
+
       return NewsChannelHeadlinesModel.fromJson(body);
 
     }
     throw Exception("Error");
-
-
   }
 }
+
