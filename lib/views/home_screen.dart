@@ -13,11 +13,20 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+
+enum FilterList {bbcNews, aryNews, independentNews, reuters, cnn, alJazeera}
+
+
 class _HomeScreenState extends State<HomeScreen> {
 
   NewsViewModel newsViewModel = NewsViewModel();
 
+  FilterList? selectedManu;
+
+
   final format = DateFormat('MMMM dd, yyyy');
+
+  String name = 'bbc-news';
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +47,40 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
         title: Text('News',style: GoogleFonts.poppins(fontSize: 24,fontWeight: FontWeight.bold),),
+
+        actions: [
+          PopupMenuButton<FilterList>(
+            initialValue: selectedManu,
+              icon: Icon(Icons.more_vert),color: Colors.black,
+              onSelected: (FilterList item){
+
+                if(item == FilterList.bbcNews){
+                  name = 'bbc-news';
+                }
+                else if(item == FilterList.aryNews){
+                  name = 'ary-news';
+                }
+
+                setState(() {
+                  selectedManu = item;
+                });
+
+              },
+
+
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<FilterList>> [
+                PopupMenuItem(
+                  value: FilterList.bbcNews,
+                  child: Text("BBC News"),
+                ),
+                PopupMenuItem(
+                  value: FilterList.aryNews,
+                  child: Text("ARY News"),
+                )
+              ]
+          )
+        ],
+
       ),
 
       body: ListView(
