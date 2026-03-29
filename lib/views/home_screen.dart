@@ -50,14 +50,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
         actions: [
           PopupMenuButton<FilterList>(
+            color: Colors.white,
             initialValue: selectedManu,
-              icon: Icon(Icons.more_vert),color: Colors.black,
+              icon: Icon(Icons.more_vert),
               onSelected: (FilterList item){
 
                 if(item == FilterList.bbcNews){
                   name = 'bbc-news';
                 }
-                else if(item == FilterList.aryNews){
+                else if(item == FilterList.cnn){
+                  name = 'cnn';
+                }else if(item == FilterList.alJazeera){
+                  name = 'al-jazeera-english';
+                }else if(item == FilterList.aryNews){
                   name = 'ary-news';
                 }
 
@@ -74,8 +79,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Text("BBC News"),
                 ),
                 PopupMenuItem(
+                  value: FilterList.cnn,
+                  child: Text("CNN News"),
+                ),
+                PopupMenuItem(
+                  value: FilterList.alJazeera,
+                  child: Text("AlJazeera"),
+                ),
+                PopupMenuItem(
                   value: FilterList.aryNews,
-                  child: Text("ARY News"),
+                  child: Text("Ary News"),
                 )
               ]
           )
@@ -89,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * .55,
             width: width,
             child: FutureBuilder<NewsChannelHeadlinesModel>(
-                future: newsViewModel.fetchNewsChannelHeadlinesApi(),
+                future: newsViewModel.fetchNewsChannelHeadlinesApi(name),
                 builder: (BuildContext context, AsyncSnapshot<dynamic>snapshot){
                   if(snapshot.connectionState == ConnectionState.waiting){
                     return Center(
