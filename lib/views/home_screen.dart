@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/model/news_channel_headlines_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
+import 'package:news_app/views/categories_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,7 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
 
         leading: IconButton(
-            onPressed: (){},
+            onPressed: (){
+              Get.to(()=> CategoriesScreen());
+            },
             icon: Image.asset('assets/images/category_icon.png',
             height: 30,
               width: 30,
