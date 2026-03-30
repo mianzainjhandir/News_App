@@ -31,7 +31,32 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 50,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: categoriesList.length,
+                  itemBuilder: (context, index){
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                              child: Text(categoriesList[index].toString()))),
+                    );
+                  }
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
