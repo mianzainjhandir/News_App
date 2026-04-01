@@ -40,6 +40,7 @@ dependencies:
   intl:
   cached_network_image:
   get: ^4.7.3
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:
