@@ -129,15 +129,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                 fontWeight: FontWeight.w700,
                                             ),),
                                             Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(snapshot.data.articles[index].source.name.toString(),
 
                                                   style: GoogleFonts.poppins(
+
                                                     fontSize: 12,
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w500,
                                                   ),),
-                                                Gap(25),
                                                 Text(format.format(dateTime).toString(),
 
                                                   style: GoogleFonts.poppins(
