@@ -3,9 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/model/category_news.dart';
+import 'package:news_app/views/category_news_detaile.dart';
 
 import '../view_model/news_view_model.dart';
 
@@ -96,62 +98,75 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             DateTime dateTime = DateTime.parse(snapshot.data.articles[index].publishedAt.toString());
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
-                                      fit: BoxFit.cover,
-                                      height : height * .18,
-                                      width : width * .3,
-                                      placeholder: (context , url) => Container(child: Center(
-                                        child: SpinKitCircle(
-                                          size: 50,
-                                          color: Colors.blue,
-                                        ),
-                                      ),),
-                                      errorWidget: (context, url, error) => Icon(Icons.error_outline,color: Colors.red,),
+                              child: InkWell(
+                                onTap: (){
+                                  Get.to(() => CategoryNewsDetaile(
+                                      description: snapshot.data.articles[index].description.toString(),
+                                      author: snapshot.data.articles[index].author.toString(),
+                                      content: snapshot.data.articles[index].content.toString(),
+                                      newImage: snapshot.data!.articles![index].urlToImage.toString(),
+                                      newsDate: snapshot.data.articles[index].publishedAt.toString(),
+                                      newstitle: snapshot.data.articles[index].title.toString(),
+                                      source: snapshot.data.articles[index].source.name.toString()
+                                  ));
+                                },
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: CachedNetworkImage(
+                                        imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                                        fit: BoxFit.cover,
+                                        height : height * .18,
+                                        width : width * .3,
+                                        placeholder: (context , url) => Container(child: Center(
+                                          child: SpinKitCircle(
+                                            size: 50,
+                                            color: Colors.blue,
+                                          ),
+                                        ),),
+                                        errorWidget: (context, url, error) => Icon(Icons.error_outline,color: Colors.red,),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
+                                    Expanded(
 
-                                      child: Container(
-                                        height: height * .18,
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: Column(
-                                          children: [
-                                            Text(snapshot.data.articles[index].title.toString(),
-                                              maxLines: 2,
-                                              style: GoogleFonts.poppins(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                                fontWeight: FontWeight.w700,
-                                            ),),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(snapshot.data.articles[index].source.name.toString(),
+                                        child: Container(
+                                          height: height * .18,
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: Column(
+                                            children: [
+                                              Text(snapshot.data.articles[index].title.toString(),
+                                                maxLines: 2,
+                                                style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                color: Colors.black,
+                                                  fontWeight: FontWeight.w700,
+                                              ),),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(snapshot.data.articles[index].source.name.toString(),
 
-                                                  style: GoogleFonts.poppins(
+                                                    style: GoogleFonts.poppins(
 
-                                                    fontSize: 12,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),),
-                                                Text(format.format(dateTime).toString(),
+                                                      fontSize: 12,
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),),
+                                                  Text(format.format(dateTime).toString(),
 
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 12,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ))
-                                ],
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 12,
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ))
+                                  ],
+                                ),
                               ),
                             );
                           }
